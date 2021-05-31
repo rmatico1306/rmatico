@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/tabla.css' %}" >
+        <div id="main-container">
+            <table>
+               
+                <caption>RESULTADOS TOTAL DE LAS ELECCIONES 2021</caption>
+                <tr>
+                    <th>LOGO</th>
+                    <th>PARTIDO POLITICO</th>
+                    <th>VOTOS</th>
+
+                </tr>
+                <tr>
+                    <td><img src="{% static 'image/independiente.jpg' %}", width="100" height="100"></td>
+                    <td>Chelo Cano, independiente</td>
+                    <td>{{resultado_cano}}</td>
+                </tr>
+                <tr>
+                    <td><img src="{% static 'image/morena.png' %}", width="100" height="100"></td>
+                    <td>Oscar enrique ramos, Morena</td>
+                    <td>{{resultado_oscar}}</td>
+                </tr>
+                <tr>
+                    <td><img src="{% static 'image/PRD.png' %}", width="100" height="100"></td>
+                    <td>Homero yanes,PRD</td>
+                    <td>{{resultado_homero}}</td>
+                </tr>
+                <tr>
+                    <td><img src="{% static 'image/PRI.png' %}", width="100" height="100"></td>
+                    <td>Aurora Piñeda,PRI</td>
+                    <td>{{resultado_aurora}}</td>
+                </tr>
+                <tr>
+                    <td><img src="{% static 'image/PT.png' %}", width="100" height="100"></td>
+                    <td>Joaquin,PT</td>
+                    <td>{{resultado_joaquin}}</td>
+                </tr>
+                <tr>
+                    <td><img src="{% static 'image/votos.jpg' %}", width="100" height="100"></td>
+                    <td>TOTAL DE VOTOS</td>
+                    <td>{{total_votos}}</td>
+                </tr>
+
+            </table>
+        </div>
+{% endblock %}

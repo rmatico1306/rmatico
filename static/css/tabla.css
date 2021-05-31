@@ -1,0 +1,34 @@
+
+body{
+    background-color: bisque;
+    font-family: Arial;   
+}
+#main-container{
+    margin:0 auto;
+    width: 400px;
+}
+table{
+    background-color: white;
+    text-align: left;
+    border-collapse: collapse;
+    width: 100%;
+}
+th,td{
+    padding: 20px;
+}
+thead{
+    background-color: #246355;
+    border-bottom: solid 5px #0f362d;
+    color: white;
+}
+tr:hover td{
+    background-color: #369681;
+    color: white;
+}
+.titulo1{
+    font-size: 50px;
+    text-align: center;
+}
+caption.titulo1{
+    font-size: 20;
+}

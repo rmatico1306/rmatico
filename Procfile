@@ -1,0 +1,1 @@
+web: gunicorn CapturaActas.wsgi --log-file -

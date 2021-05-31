@@ -1,0 +1,22 @@
+<html>
+  <body>
+      <p>Estas Buscando: <strong>{{query}}</strong> </p>
+      {%if acta1 %}
+        <p>Actas encontrados: {{acta1|length}} Actas</p>
+        <ul>
+          {% for acta in acta1 %}
+          <li>
+            {{acta}}&nbsp;{{acta}}&nbsp;
+    
+     
+          </li>
+          {%endfor%}
+     
+        </ul>
+      {%else%}
+        <p>Acta no encontrada</p>
+      
+      {%endif%}
+      
+  </body>
+</html>

@@ -1,0 +1,16 @@
+
+    {% extends "base.html" %}
+    {% load static %}
+    {% block content %}
+       
+        <header> <h1>Contactanos</h1></header>
+        {%if form.errors %}
+        <p style="color:brown">por favor revisa esta campo</p> 
+        {%endif%}
+        <form action="" method="POST">{% csrf_token%}
+            <table>
+                {{form.as_table}}
+            </table>
+            <input type="submit" value="enviar">
+        </form>
+    {% endblock %}

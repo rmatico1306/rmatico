@@ -1,2 +1,1 @@
-# rmatico
-para mis aplicaciones
+# actasvotos
