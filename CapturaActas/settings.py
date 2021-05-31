@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 #SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-#DEBUG = False
+DEBUG = False
 #DEBUG = config('DJANGO_DEBUG', default=True, cast=bool)
-DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
+#DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-z-h(4eo+qy5e4+$v#-0i@&fo051)c2p%z5pbd-r#myp&!_mx($')
 #SECRET_KEY = config('SECRET_KEY', default='django-insecure-z-h(4eo+qy5e4+$v#-0i@&fo051)c2p%z5pbd-r#myp&!_mx($')
 ALLOWED_HOSTS = ['*']
@@ -83,22 +83,29 @@ WSGI_APPLICATION = 'CapturaActas.wsgi.application'
 
 DATABASES = {
     'default': {
-    'ENGINE': 'django.db.backends.mysql',
-    'NAME': 'baseelectoral',
-    'USER':'root',
-    'PASSWORD':'',
-    'HOST':'127.0.0.1',
-    'DATABASE_PORT':'3306',
+        # 'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'basedatoselectoral',
+        'USER':'',
+        'PASSWORD':'',
+        'HOST':'127.0.0.1',
+        'DATABASE_PORT':'',
+        
+        #'USER':'root',
+        #'PASSWORD':'',
+        #'HOST':'127.0.0.1',
+        #'DATABASE_PORT':'3307',
     }
 }
+
 import dj_database_url
 from decouple import config
 
-#DATABASES = {
-#    'default': dj_database_url.config(
-#        default=config('DATABASE_URL')
-#    )
-#}
+DATABASES = {
+    'default': dj_database_url.config(
+       default=config('DATABASE_URL')
+    )
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -156,6 +163,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+#import dj_database_url
+#db_from_env = dj_database_url.config(conn_max_age=500)
+#DATABASES['default'].update(db_from_env)
