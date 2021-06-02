@@ -3,6 +3,25 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/tabla.css' %}" >
         <div id="main-container">
+            <div style="color: rgb(255, 253, 255);">
+                <form action="" method="POST">{% csrf_token%}
+                    <p>
+                   
+                        {{form}}
+                        <input type="submit" value="Buscar">  
+                    </p>
+                        
+                   
+                        
+                       
+                    
+                        
+                
+                </form>
+            
+            </div>
+            
+
             <table>
                
                 <caption>RESULTADOS TOTAL DE LAS ELECCIONES 2021</caption>

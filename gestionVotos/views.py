@@ -4,7 +4,7 @@ from gestionVotos.models import Acta
 from django.db.models import Count, Sum
 from django.core.mail import send_mail
 from django.conf import settings
-from gestionVotos.forms import FormularioContacto
+from gestionVotos.forms import FormularioContacto, FormularioActa
 
 # Create your views here.
 def home(request):
@@ -40,6 +40,7 @@ def contacto(request):
             intForm= miFormlario.cleaned_data
             send_mail(intForm['asunto'],intForm['mensaje'],
             intForm.get('email',''),['rmatico13@hotmal.com'])
+            
             return render(request,"gracias.html")
     else:
         miFormlario= FormularioContacto()
@@ -53,13 +54,39 @@ def contacto(request):
     return render(request,"contacto.html")
     '''
 def resultados_votaciones(request):
+
+    
+    #total_cheloCano= Acta.objects.aggregate(total= Sum('num_votoChelo'))
     total_cheloCano= Acta.objects.aggregate(total= Sum('num_votoChelo'))
     total_morena= Acta.objects.aggregate(total= Sum('num_votoMorena')) 
     total_PRD= Acta.objects.aggregate(total= Sum('num_prd')) 
     total_PRI= Acta.objects.aggregate(total= Sum('num_pri')) 
     total_PT= Acta.objects.aggregate(total= Sum('num_pt'))
     total_votos= Acta.objects.aggregate(total= Sum('total_votos'))
-    return render(request,"resultadosActas.html",{"resultado_cano":total_cheloCano['total'],"resultado_oscar":total_morena['total'],"resultado_homero":total_PRD['total'],"resultado_aurora":total_PRI['total'],"resultado_joaquin":total_PT['total'],"total_votos":total_votos['total']})
+    
+    #total_cheloCano= Acta.objects.filter(610).aggregate(total= Sum('num_votoChelo'))    
 
+        #return render(request,"resultadosActas.html",{"form":miFormulalarioActa,"resultado_cano":total_cheloCano['total'],"resultado_oscar":total_morena['total'],"resultado_homero":total_PRD['total'],"resultado_aurora":total_PRI['total'],"resultado_joaquin":total_PT['total'],"total_votos":total_votos['total']})
+    
+    if request.method=="POST":
+        miFormulalarioActa= FormularioActa(request.POST)
+        if miFormulalarioActa.is_valid():
+            intForm= miFormulalarioActa.cleaned_data
+            seccion_buscar=intForm.get('seccion')
+            #con el metodo.get recupero la informacion que se esta dando en el formulario
+            #resul_seccion(seccion)
+            total_cheloCano= Acta.objects.filter(seccion=seccion_buscar).aggregate(total= Sum('num_votoChelo'))
+            total_morena= Acta.objects.filter(seccion=seccion_buscar).aggregate(total= Sum('num_votoMorena'))
+            total_PRD= Acta.objects.filter(seccion=seccion_buscar).aggregate(total= Sum('num_prd'))
+            total_PRI= Acta.objects.filter(seccion=seccion_buscar).aggregate(total= Sum('num_pri'))
+            total_PT= Acta.objects.filter(seccion=seccion_buscar).aggregate(total= Sum('num_pt'))
+            total_votos= Acta.objects.filter(seccion=seccion_buscar).aggregate(total= Sum('total_votos'))
+    else:
+        miFormulalarioActa= FormularioActa()
+        
+
+    return render(request,"resultadosActas.html",{"form":miFormulalarioActa,"resultado_cano":total_cheloCano['total'],"resultado_oscar":total_morena['total'],"resultado_homero":total_PRD['total'],"resultado_aurora":total_PRI['total'],"resultado_joaquin":total_PT['total'],"total_votos":total_votos['total']})
+    print(Acta.objects.aggregate(total= Sum('total_votos')))
+    print (Acta.objects.filter(seccion=610).aggregate(total= Sum('num_votoMorena')))
 #def totalvotos(request):
  #   return render()
