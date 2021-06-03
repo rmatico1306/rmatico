@@ -25,6 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 #SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
+#DEBUG= Fasle para subirlo a heroku
 DEBUG = False
 #DEBUG = config('DJANGO_DEBUG', default=True, cast=bool)
 #DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
@@ -98,6 +99,7 @@ DATABASES = {
     }
 }
 
+#descomentar estas lineas  cuando se suba al servidor
 import dj_database_url
 from decouple import config
 
