@@ -100,6 +100,7 @@ DATABASES = {
 }
 
 #descomentar estas lineas  cuando se suba al servidor
+
 import dj_database_url
 from decouple import config
 
@@ -134,7 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
 #LANGUAGE_CODE = 'en-us'
 LANGUAGE_CODE = 'es-eu'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'US/Pacific'
 
 USE_I18N = True
 
