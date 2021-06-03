@@ -4,9 +4,12 @@ from django.contrib import admin
 from gestionVotos.models import Acta, Politico
 #configuracion para desplegar  la busquedas 
 class ActaAdmin(admin.ModelAdmin):
-    list_display=("seccion", "tipo_casilla","num_votoChelo","num_votoMorena","num_prd","num_pri","num_pt",
-    "num_verde", "num_movimientociudadano", "num_encuentrosolidario", "num_redesSociales","num_fuerzaMexico",
-    "num_candidatosNoRegistrados","num_votoNulos","total_votos")
+    
+    list_display=("seccion", "tipo_casilla","num_votoChelo","num_votoMorena","num_pri",
+    "num_prd","num_verde","num_pt","num_movimientociudadano",
+    "num_encuentrosolidario","num_redesSociales","num_fuerzaMexico", 
+    "num_candidatosNoRegistrados","num_votoNulos","total_votos",
+    )
     search_fields=("seccion",)
     list_filter=("tipo_casilla",)
     
