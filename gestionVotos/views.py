@@ -62,6 +62,12 @@ def resultados_votaciones(request):
     total_PRD= Acta.objects.aggregate(total= Sum('num_prd')) 
     total_PRI= Acta.objects.aggregate(total= Sum('num_pri')) 
     total_PT= Acta.objects.aggregate(total= Sum('num_pt'))
+    total_movimientoC= Acta.objects.aggregate(total= Sum('num_movimientociudadano'))
+    total_encuentro= Acta.objects.aggregate(total= Sum('num_encuentrosolidario'))
+    total_redesSociales= Acta.objects.aggregate(total= Sum('num_redesSociales'))
+    total_fuerzaMexico= Acta.objects.aggregate(total= Sum('num_fuerzaMexico'))
+    total_candidatosNoRegistrado= Acta.objects.aggregate(total= Sum('num_candidatosNoRegistrados'))
+    total_votosnulos= Acta.objects.aggregate(total= Sum('num_votoNulos'))
     total_votos= Acta.objects.aggregate(total= Sum('total_votos'))
     
     #total_cheloCano= Acta.objects.filter(610).aggregate(total= Sum('num_votoChelo'))    
@@ -80,12 +86,20 @@ def resultados_votaciones(request):
             total_PRD= Acta.objects.filter(seccion=seccion_buscar).aggregate(total= Sum('num_prd'))
             total_PRI= Acta.objects.filter(seccion=seccion_buscar).aggregate(total= Sum('num_pri'))
             total_PT= Acta.objects.filter(seccion=seccion_buscar).aggregate(total= Sum('num_pt'))
+            total_movimientoC= Acta.objects.filter(seccion=seccion_buscar).aggregate(total= Sum('num_movimientociudadano'))
+            total_encuentro= Acta.objects.filter(seccion=seccion_buscar).aggregate(total= Sum('num_encuentrosolidario'))
+            total_redesSociales= Acta.objects.filter(seccion=seccion_buscar).aggregate(total= Sum('num_redesSociales'))
+            total_fuerzaMexico= Acta.objects.filter(seccion=seccion_buscar).aggregate(total= Sum('num_fuerzaMexico'))
+            total_candidatosNoRegistrado= Acta.objects.filter(seccion=seccion_buscar).aggregate(total= Sum('num_candidatosNoRegistrados'))
+            total_votosnulos= Acta.objects.filter(seccion=seccion_buscar).aggregate(total= Sum('num_votoNulos'))
             total_votos= Acta.objects.filter(seccion=seccion_buscar).aggregate(total= Sum('total_votos'))
+
     else:
         miFormulalarioActa= FormularioActa()
         
+    totalOtros=total_movimientoC['total']+total_encuentro['total']+total_redesSociales['total']+total_fuerzaMexico['total']
 
-    return render(request,"resultadosActas.html",{"form":miFormulalarioActa,"resultado_cano":total_cheloCano['total'],"resultado_oscar":total_morena['total'],"resultado_homero":total_PRD['total'],"resultado_aurora":total_PRI['total'],"resultado_joaquin":total_PT['total'],"total_votos":total_votos['total']})
+    return render(request,"resultadosActas.html",{"form":miFormulalarioActa,"resultado_cano":total_cheloCano['total'],"resultado_oscar":total_morena['total'],"resultado_homero":total_PRD['total'],"resultado_aurora":total_PRI['total'],"resultado_joaquin":total_PT['total'],"total_votos":total_votos['total'],"total_otros":totalOtros,"total_nulos":total_votosnulos['total'],"total_no_registrado":total_candidatosNoRegistrado['total']})
     print(Acta.objects.aggregate(total= Sum('total_votos')))
     print (Acta.objects.filter(seccion=610).aggregate(total= Sum('num_votoMorena')))
 #def totalvotos(request):
