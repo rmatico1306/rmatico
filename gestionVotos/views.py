@@ -97,8 +97,10 @@ def resultados_votaciones(request):
     else:
         miFormulalarioActa= FormularioActa()
         
-    totalOtros=total_movimientoC['total']+total_encuentro['total']+total_redesSociales['total']+total_fuerzaMexico['total']
-
+    try:
+        totalOtros=total_movimientoC['total']+total_encuentro['total']+total_redesSociales['total']+total_fuerzaMexico['total']
+    except:
+        totalOtros=0
     return render(request,"resultadosActas.html",{"form":miFormulalarioActa,"resultado_cano":total_cheloCano['total'],"resultado_oscar":total_morena['total'],"resultado_homero":total_PRD['total'],"resultado_aurora":total_PRI['total'],"resultado_joaquin":total_PT['total'],"total_votos":total_votos['total'],"total_otros":totalOtros,"total_nulos":total_votosnulos['total'],"total_no_registrado":total_candidatosNoRegistrado['total']})
     print(Acta.objects.aggregate(total= Sum('total_votos')))
     print (Acta.objects.filter(seccion=610).aggregate(total= Sum('num_votoMorena')))
