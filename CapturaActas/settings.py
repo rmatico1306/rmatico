@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'gestionVotos',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -109,6 +110,7 @@ DATABASES = {
       default=config('DATABASE_URL')
     )
 }
+
 
 
 # Password validation

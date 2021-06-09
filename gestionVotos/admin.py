@@ -1,9 +1,19 @@
 from django.contrib import admin
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 
 # Register your models here.
 from gestionVotos.models import Acta, Politico
 #configuracion para desplegar  la busquedas 
-class ActaAdmin(admin.ModelAdmin):
+
+class ActaResource(resources.ModelResource):
+    ''' se utiliza este metodo para importar y exportar  a excel, json y otras extenciones
+    no olvidarse de intalar la libreria importexport, y modificar la clase admin agregandole 
+    ImportExportModelAdmin'''
+    class Meta:
+        model=Acta
+
+class ActaAdmin(ImportExportModelAdmin,admin.ModelAdmin):
     
     list_display=("seccion", "tipo_casilla","num_votoChelo","num_votoMorena","num_pri",
     "num_prd","num_verde","num_pt","num_movimientociudadano",
@@ -23,7 +33,7 @@ class ActaAdmin(admin.ModelAdmin):
         return self.readonly_fields
     #readonly_fields = ('seccion',)
     #readonly_fields = ('seccion', 'tipo_casila')
-    
+    resource_class= ActaResource
 class PoliticoAdmin(admin.ModelAdmin):
     #lo que va mostrar en la tabla
     list_display=("nombre", "edad", "direccion")
